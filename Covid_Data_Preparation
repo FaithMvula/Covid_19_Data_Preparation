@@ -37,7 +37,7 @@ SELECT
 	 total_deaths,
 	 (total_deaths/total_cases)*100 as DeathPercentage
 FROM
-         PortfolioProject..CovidDeaths
+         PortfolioProject.CovidDeaths
 WHERE
           location like '%states%'
 AND 
@@ -55,9 +55,9 @@ SELECT
 	total_cases,  
 	(total_cases/population)*100 as PercentPopulationInfected
 FROM 
-        PortfolioProject..CovidDeaths
+        PortfolioProject.CovidDeaths
 
-ORDER BY 1,2
+ORDER BY 1,2 ;
 
 
 ##Q3. Which Countries have the Highest Infection Rate compared to their Population?
@@ -73,7 +73,7 @@ WHERE
         continent IS NOT NULL
 GROUP BY 1,2 
 ORDER BY 
-        PercentPopulationInfected DESC
+        PercentPopulationInfected DESC ;
 
 
 ##Q4.Which Countries with Highest Death Count per Population ?
@@ -82,13 +82,13 @@ SELECT
       Location,
       MAX(cast(Total_deaths as int)) as TotalDeathCount
 FROM
-      PortfolioProject..CovidDeaths
+      PortfolioProject.CovidDeaths
 WHERE 
        continent is not null 
 GROUP BY  
         Location
 ORDER BY
-        TotalDeathCount desc
+        TotalDeathCount desc ;
 
 
 ##Q5. Which contintents have the highest death count per population ?
@@ -97,13 +97,13 @@ SELECT
         continent,
 	MAX(cast(Total_deaths as int)) as TotalDeathCount
 FROM 
-        PortfolioProject..CovidDeaths
+        PortfolioProject.CovidDeaths
 WHERE
         continent is not null 
 GROUP BY
           continent
 ORDER BY 
-         TotalDeathCount desc
+         TotalDeathCount desc ;
 
 
 
@@ -113,12 +113,12 @@ SELECT
          SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) as total_deaths, 
 	 SUM(cast(new_deaths as int))/SUM(New_Cases)*100 as DeathPercentage
 FROM
-        PortfolioProject..CovidDeaths
+        PortfolioProject.CovidDeaths
 WHERE 
         continent is not null 
 GROUP BY
          date
-ORDER BY 1,2
+ORDER BY 1,2 ;
 
 
 ##Q7. Create a  View to store data.
@@ -141,4 +141,4 @@ On
 AND     
          dea.date = vac.date
 WHERE
-        dea.continent is not null 
+        dea.continent is not null ;
